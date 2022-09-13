@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable()
                 // don't authenticate this particular request
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/forgot-password").permitAll()
+                .antMatchers("/api/v1/authenticate", "/api/v1/refreshToken").permitAll()
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to

@@ -57,7 +57,6 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({TokenRefreshException.class})
-
     public ApiResponse handleTokenRefreshException(HttpServletRequest req, HttpServletResponse res,
                                            final TokenRefreshException ex) throws IOException {
         ApiResponse apiError = new ApiResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), ex.getData());

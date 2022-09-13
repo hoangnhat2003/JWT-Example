@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Objects;
 
-@RequestMapping("/api/v1/authenticate")
+@RequestMapping("/api/v1")
 @RestController
 public class AuthController {
 
@@ -46,8 +46,8 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtil;
 
-    @PostMapping
-    public ResponseEntity<?> authenticate(@RequestBody LoginRequest request) throws Exception {
+    @PostMapping("/authenticate")
+    public ApiResponse authenticate(@Valid @RequestBody LoginRequest request) throws Exception {
         User userDetails = userService.findByEmail(request.getEmail());
         authenticate(request.getEmail(), request.getPassword());
 
@@ -60,10 +60,11 @@ public class AuthController {
         tokenDTO.setEmail(request.getEmail());
         tokenDTO.setUsername(userDetails.getUsername());
         tokenDTO.setToken(token);
+        tokenDTO.setRoles(userDetails.getRoles());
         tokenDTO.setRefreshToken(refreshToken.getToken());
         tokenDTO.setExpiredDate(jwtUtil.getExpirationDateFromToken(token));
 
-        return ResponseEntity.ok(new ApiResponse(HttpStatus.OK.value(), "Login successfully", tokenDTO));
+        return new ApiResponse(HttpStatus.OK.value(), "Login successfully", tokenDTO);
     }
 
     private void authenticate(String email, String password) throws Exception {

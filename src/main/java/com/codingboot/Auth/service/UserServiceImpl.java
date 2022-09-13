@@ -42,11 +42,6 @@ public class UserServiceImpl implements UserService{
        // user.getRoles().add(role);
     }
 
-    @Override
-    public User getUser(String username) {
-        //log.info("Fetching user{}",username);
-        return userRepository.findByUserName(username);
-    }
 
     @Override
     public List<User> getUsers(){

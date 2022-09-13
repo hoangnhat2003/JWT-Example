@@ -16,7 +16,7 @@ import java.util.UUID;
 public class RefreshTokenServiceImpl implements RefreshTokenService{
 
 
-    public static final long REFRESH_TOKEN_VALIDITY = 5*60*60;
+    public static final long REFRESH_TOKEN_VALIDITY = 60*60*60*60;
 
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
