@@ -17,6 +17,7 @@ public class TokenDTO {
     private String username;
     private String email;
     private String token;
+    private String refreshToken;
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date expiredDate;
     private Set<Role> roles;

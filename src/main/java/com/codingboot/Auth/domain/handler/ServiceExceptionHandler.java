@@ -2,6 +2,7 @@ package com.codingboot.Auth.domain.handler;
 
 import com.codingboot.Auth.domain.exception.AuthExceptionHandling;
 import com.codingboot.Auth.domain.exception.ServiceException;
+import com.codingboot.Auth.domain.exception.TokenRefreshException;
 import com.codingboot.Auth.domain.exception.ValidateExceptionHandling;
 import com.codingboot.Auth.domain.response.ApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,6 +53,14 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     public ApiResponse handleAuthException(HttpServletRequest req, HttpServletResponse res,
                                               final AuthExceptionHandling ex) throws IOException {
         ApiResponse apiError = new ApiResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), null);
+        return apiError;
+    }
+
+    @ExceptionHandler({TokenRefreshException.class})
+
+    public ApiResponse handleTokenRefreshException(HttpServletRequest req, HttpServletResponse res,
+                                           final TokenRefreshException ex) throws IOException {
+        ApiResponse apiError = new ApiResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), ex.getData());
         return apiError;
     }
 }

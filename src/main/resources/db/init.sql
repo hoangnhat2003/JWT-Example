@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS tbl_refresh_token (
 id SERIAL,
 user_id INT,
 token VARCHAR(255),
-expiryDate TIMESTAMP,
+expiry_date TIMESTAMP,
 created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 CONSTRAINT refresh_token_fk1 FOREIGN KEY (user_id) REFERENCES tbl_users(id),
